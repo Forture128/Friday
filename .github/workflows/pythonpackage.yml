@@ -20,7 +20,7 @@ jobs:
         python_version: 3.6.7
         poetry_version: 1.0.2
         working_directory: .
-        args: run python -m pytest --cov=src --cov-branch --cov-fail-under=100
+        args: run python -m pytest --cov=src --cov-branch --cov-fail-under=100 --cov-report=html
     - name: Lint with flake8
       uses: abatilo/actions-poetry@v1.3.0
       with:
@@ -28,3 +28,8 @@ jobs:
         poetry_version: 1.0.2
         working_directory: .
         args: run python -m flake8 src/
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@master
+      with:
+          name: pytest-cov-results-3.6
+          path: htmlcov
