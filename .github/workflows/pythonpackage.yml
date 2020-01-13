@@ -51,6 +51,5 @@ jobs:
           - name: Print the coverage result
             shell: bash
             run: |
-                value=`cat pytest-cov-results-${{ matrix.python-version }}-plain-text/cov_report_${{ matrix.python-version }}.txt`
-                echo $value
+                echo "$(cat pytest-cov-results-${{ matrix.python-version }}-plain-text/cov_report_${{ matrix.python-version }}.txt)"
 
