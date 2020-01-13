@@ -36,21 +36,21 @@ jobs:
           name: pytest-cov-results-${{ matrix.python-version }}-plain-text
           path: cov_report_${{ matrix.python-version }}.txt
 
-    display_cov:
-        name: Display coverage results
-        needs: pytest
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                python-version: [3.6, 3.7, 3.8]
-        steps:
-            - name: Download result from pytest job
-              uses: actions/download-artifact@master
-              with:
-                  name: pytest-cov-results-${{ matrix.python-version }}-plain-text
-            - name: Print the coverage result
-              shell: bash
-              run: |
-                  value=`cat cov_report_${{ matrix.python-version }}.txt`
-                  echo $value
+  display_cov:
+      name: Display coverage results
+      needs: pytest
+      runs-on: ubuntu-latest
+      strategy:
+          matrix:
+              python-version: [3.6, 3.7, 3.8]
+      steps:
+          - name: Download result from pytest job
+            uses: actions/download-artifact@master
+            with:
+                name: pytest-cov-results-${{ matrix.python-version }}-plain-text
+          - name: Print the coverage result
+            shell: bash
+            run: |
+                value=`cat cov_report_${{ matrix.python-version }}.txt`
+                echo $value
 
