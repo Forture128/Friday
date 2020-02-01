@@ -32,7 +32,7 @@ class Esp32Handler:
 
     def get_subscriptions(self):
         result = []
-        
+
         for sensor in self.SUPPORT_SENSOR:
             for report_type in self.SUPPORT_REPORT_TYPE:
                 result.append(self.generate_topic(sensor, report_type))

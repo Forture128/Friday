@@ -30,7 +30,7 @@ class MQTTController(mqtt.Client):
 
     def on_message(self, mqttc, obj, msg):
         print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
-        
+
         for handler in self._handler_map.get(msg.topic, []):
             if is_object_has_method(handler, "handle_for"):
                 handler.handle_for(mqttc, obj, msg)
@@ -74,7 +74,7 @@ class MQTTController(mqtt.Client):
             topic_list = []
             if is_object_has_method(handler, "get_subscriptions"):
                 topic_list = handler.get_subscriptions()
-                
+
             for topic in topic_list:
                 result.setdefault(topic, [])
                 result[topic].append(handler)
