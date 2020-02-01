@@ -130,3 +130,5 @@ dmypy.json
 
 # Others
 .vim
+*.swp
+*.swo
