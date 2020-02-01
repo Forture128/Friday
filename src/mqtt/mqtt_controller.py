@@ -9,7 +9,7 @@ from utils.object_utils import is_object_has_method
 class MQTTController(mqtt.Client):
     """
     Main MQTT Controller, this class acts as the subscriber to MQTT broker,
-    then with each register topic will distribute the messae to the
+    then with each register topic will distribute the message to the
     actual handlers
     """
 
@@ -57,6 +57,16 @@ class MQTTController(mqtt.Client):
         return self.HANDLER_LIST
 
     def build_mapper_for_subscriptable_handlers(self, handler_list):
+        """ Loop through handlers list to build mapper for easier handling message.
+
+        For ex: with handler A for topic "ABC" and "DEF", handler B for topic
+        "NULL" and "ABC", the mapper will be:
+        {
+            "ABC": [<obj A>, <obj B>],
+            "NULL": [<obj B>],
+            "DEF":  [<obj A>]
+        }
+        """
         result = {}
 
         for handler in self.HANDLER_LIST:
@@ -69,7 +79,6 @@ class MQTTController(mqtt.Client):
                 result.setdefault(topic, [])
                 result[topic].append(handler)
 
-        print("SDFSDFSDF", result)
         return result
 
 
