@@ -19,8 +19,14 @@ class FridayController(MQTTController):
 
 
 if __name__ == "__main__":
+
+    import os
+
+    hostname = os.getenv("FRIDAY_HOSTNAME", "localhost")
+    port = os.getenv("FRIDAY_PORT", 1883)
+
     mqttc = FridayController()
-    mqttc.initialize("localhost", 1883, 60)
+    mqttc.initialize(hostname, port, 60)
     rc = mqttc.run()
 
     print("rc: " + str(rc))

@@ -17,4 +17,4 @@ test: clean-pyc clean-cov
 	python -m pytest --cov=src --cov-branch --cov-fail-under=100 --cov-report=html --verbose --color=yes --cov-config=.coveragerc
 
 run:
-	echo "No run file"
+	python -m src.mqtt.friday_controller
