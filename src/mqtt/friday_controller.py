@@ -20,7 +20,7 @@ class FridayController(MQTTController):
 
 if __name__ == "__main__":
     mqttc = FridayController()
-    mqttc.initialize("192.168.1.15", 1883, 60)
+    mqttc.initialize("localhost", 1883, 60)
     rc = mqttc.run()
 
     print("rc: " + str(rc))
