@@ -3,9 +3,10 @@ Project:
 Author:
 """
 
-from mqtt_controller import MQTTController
-from handlers.hello_world_handler import HelloWorldHandler
-from handlers.esp32_handler import Esp32Handler
+from .mqtt_controller import MQTTController
+
+from .handlers.hello_world_handler import HelloWorldHandler
+from .handlers.esp32_handler import Esp32Handler
 
 
 class FridayController(MQTTController):

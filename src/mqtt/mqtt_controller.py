@@ -3,7 +3,8 @@ Project:
 Author:
 """
 import paho.mqtt.client as mqtt
-from utils.object_utils import is_object_has_method
+
+from .utils.object_utils import is_object_has_method
 
 
 class MQTTController(mqtt.Client):
