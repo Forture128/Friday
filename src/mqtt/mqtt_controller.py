@@ -23,7 +23,7 @@ class MQTTController(mqtt.Client):
         self._keepalive = keepalive
 
         self._handler_map = self.build_mapper_for_subscriptable_handlers(
-                self.get_handler_list()
+            self.get_handler_list()
         )
 
     def on_connect(self, mqttc, obj, flags, rc):
@@ -45,7 +45,7 @@ class MQTTController(mqtt.Client):
     def on_log(self, mqttc, obj, level, string):
         print(string)
 
-    def run(self):
+    def run(self):  # pragma: no cover
         self.connect(self._hostname, self._port, self._keepalive)
         self.subscribe("#", 0)
 
@@ -70,7 +70,7 @@ class MQTTController(mqtt.Client):
         """
         result = {}
 
-        for handler in self.HANDLER_LIST:
+        for handler in handler_list:
 
             topic_list = []
             if is_object_has_method(handler, "get_subscriptions"):
