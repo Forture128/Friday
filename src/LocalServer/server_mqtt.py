@@ -2,8 +2,7 @@
 import paho.mqtt.client as mqtt
 
 from utils.object_utils import is_object_has_method
-
-RASPBERRY3_HOSTNAME = '192.168.1.115'
+from utils.get_subscribtion import build_mapper_subscribe_handlers
 
 
 class GetDataFromDevice(mqtt.Client):
@@ -12,18 +11,25 @@ class GetDataFromDevice(mqtt.Client):
     ]
 
     # [START init server]
-    def initialize(self, hostname, port, keepalive):
+    def __init__(self, client_id="", protocol=mqtt.MQTTv311, transport="tcp"):
+        super().__init__(client_id="", protocol=mqtt.MQTTv311, transport="tcp")
+        self._handler_map = build_mapper_subscribe_handlers(
+            self.get_handler_list())
+        self.transport = transport
+        self.protocol = protocol
+        self.client_id = client_id
+        self._hostname = ''
+        self._port = 0
+        self._keep_alive = 60
+
+    def config_initialize(self, hostname, port, keep_alive):
         self._hostname = hostname
         self._port = port
-        self._keepalive = keepalive
+        self._keep_alive = keep_alive
 
-        self._handler_map = self.build_mapper_subscriptable_handelers(
-            self.get_handler_list()
-        )
     # [END init server]
 
     def run(self):
-
         self.connect(self._hostname, self._port)
         self.subscribe("#", 0)
 
@@ -47,11 +53,16 @@ class GetDataFromDevice(mqtt.Client):
     def on_message(self, mqttc, obj, msg):
         print("SERVER_MQTT  == " + msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
 
-
-        # Mapping with topic in handler.
-        for handler in self._handler_map.get(msg.topic, []):
-            if is_object_has_method(handler, "handle_for"):
-                handler.handle_for(mqttc, obj, msg)
+        topic = msg.topic
+        payload = msg.payload.decode("utf-8")
+        if payload is not None:
+            try:
+                # Mapping with topic in handler.
+                for handler in self._handler_map.get(msg.topic, []):
+                    if is_object_has_method(handler, "handle_for"):
+                        handler.handle_for(topic, payload)
+            except ValueError:
+                print('payload is None')
 
     def on_subscribe(self, mqttc, obj, mid, granted_qos):
         print("Subscribed: " + str(mid) + " " + str(granted_qos))
@@ -62,23 +73,3 @@ class GetDataFromDevice(mqtt.Client):
 
     def get_handler_list(self):
         return self.HANDLER_LIST
-
-    def build_mapper_subscriptable_handelers(self, hander_list):
-        result = {}
-
-        for handler in hander_list:
-
-            topic_list = []
-            if is_object_has_method(handler, "get_subscription"):
-                topic_list = handler.get_subscription()
-
-            for topic in topic_list:
-                result.setdefault(topic, [])
-                result[topic].append(handler)
-        return result
-
-
-if __name__ == '__main__':
-    mqttc = GetDataFromDevice()
-    mqttc.initialize("localhost", 1883, 60)
-    rc = mqttc.run()

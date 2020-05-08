@@ -2,13 +2,12 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/../GatewayToGCP/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="python-docs-samples" />
     <orderEntry type="module" module-name="community" />
-    <orderEntry type="module" module-name="DeviceToGateway" />
     <orderEntry type="module" module-name="Friday" />
   </component>
 </module>

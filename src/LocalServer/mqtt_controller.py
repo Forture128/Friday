@@ -15,8 +15,9 @@ if __name__ == '__main__':
 
     args = parse_command_line_args()
 
-    hostname = str(args.hostname_1)
+    hostname = str(args.host_1)
     port = args.port_1
     mqttc = SeverMQTT_Pi2B()
-    mqttc.initialize(hostname, port, 60)
-    mqttc.run()
+    mqttc.config_initialize(hostname, port, 60)
+    rc = mqttc.run()
+    print("rc: " + str(rc))

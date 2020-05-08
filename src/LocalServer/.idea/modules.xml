@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../DeviceToGateway/.idea/DeviceToGateway.iml" filepath="$PROJECT_DIR$/../DeviceToGateway/.idea/DeviceToGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../.idea/Friday.iml" filepath="$PROJECT_DIR$/../../.idea/Friday.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../LocalServer/.idea/GatewayToGCP.iml" filepath="$PROJECT_DIR$/../LocalServer/.idea/GatewayToGCP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GatewayToGCP.iml" filepath="$PROJECT_DIR$/.idea/GatewayToGCP.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../GCP/community/.idea/community.iml" filepath="$PROJECT_DIR$/../../../GCP/community/.idea/community.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../GCP/python-docs-samples/.idea/python-docs-samples.iml" filepath="$PROJECT_DIR$/../../../GCP/python-docs-samples/.idea/python-docs-samples.iml" />
     </modules>

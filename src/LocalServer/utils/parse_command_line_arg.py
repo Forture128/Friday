@@ -8,7 +8,7 @@ def parse_command_line_args():
         'Argument friday-controller'))
 
     parser.add_argument(
-        '--hostname_1',
+        '--host_1',
         default='localhost',
         help='Host name Raspberry Server')
 
@@ -19,7 +19,7 @@ def parse_command_line_args():
         help='Port raspberry server')
 
     parser.add_argument(
-        '--hostname_2',
+        '--host_2',
         default='192.168.1.115',
         help='Host name Raspberry forwarder')
 
