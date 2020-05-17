@@ -2,12 +2,13 @@ import paho.mqtt.client as mqtt
 
 from .utils.object_utils import is_object_has_method
 
+
 def error_str(rc):
     """Convert a Paho error to a human readable string."""
     return '{}: {}'.format(rc, mqtt.error_string(rc))
 
-class ForwarderServer:
 
+class ForwarderServer:
     HANDLER_LIST = [
     ]
 
@@ -35,7 +36,7 @@ class ForwarderServer:
         forwarder_client.subscribe("#", 0)
 
     # [START] Call handler
-    def send_data(self,topic, payload):
+    def send_data(self, topic, payload):
         """Build mapping topic support"""
         try:
             # Mapping with topic in handler.
@@ -44,6 +45,7 @@ class ForwarderServer:
                     handler.handle_for(topic, payload)
         except ValueError:
             print('payload is None')
+
     # [END] Call handler
 
     def on_connect(self, client, user_data, flags, rc):

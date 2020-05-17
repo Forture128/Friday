@@ -20,7 +20,7 @@ def parse_command_line_args():
 
     parser.add_argument(
         '--host_2',
-        default='192.168.1.115',
+        default='192.168.1.115', # ip ForwarderServer
         help='Host name Raspberry forwarder')
 
     parser.add_argument(

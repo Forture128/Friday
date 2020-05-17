@@ -1,4 +1,4 @@
-from utils.object_utils import is_object_has_method
+from src.AgentController.utils.object_utils import is_object_has_method
 
 
 def build_mapper_subscribe_handlers(handler_list):
@@ -9,13 +9,15 @@ def build_mapper_subscribe_handlers(handler_list):
     result = {}
 
     for handler in handler_list:
-
+        print('handler_list == ',handler_list)
         topic_list = []
         if is_object_has_method(handler, "get_subscription"):
             topic_list = handler.get_subscription()
+            print('topic_list = ', topic_list)
 
         for topic in topic_list:
             result.setdefault(topic, [])
             result[topic].append(handler)
     return result
+
 __all__ = ['build_mapper_subscribe_handlers']
